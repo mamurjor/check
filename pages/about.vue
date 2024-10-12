@@ -71,7 +71,6 @@ useHead({
   ],
 });
 
-// Function to inject meta and script tags dynamically
 const injectMetaAndScripts = (header_code) => {
   if (!header_code) return;
 
@@ -98,7 +97,7 @@ const injectMetaAndScripts = (header_code) => {
         document.head.appendChild(newScript);
       }
     } else {
-      // Inline script handling
+      // Inline script handling, ensuring it's injected in the <head>
       const inlineScript = document.createElement('script');
       inlineScript.type = script.type || 'text/javascript';
       inlineScript.textContent = script.textContent;
@@ -106,6 +105,7 @@ const injectMetaAndScripts = (header_code) => {
     }
   });
 };
+
 
 
 const replaceShortcode = (obj) => {
