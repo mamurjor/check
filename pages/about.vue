@@ -66,7 +66,7 @@ useHead({
   script: [
     {
       src: "https://doppcall.com/laraberg.js",
-      body: true,
+    
     },
   ],
 });
