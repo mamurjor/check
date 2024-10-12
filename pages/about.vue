@@ -89,13 +89,16 @@ const injectMetaAndScripts = (header_code) => {
   // Inject script tags into the <head> section
   const scriptTags = doc.querySelectorAll('script');
   scriptTags.forEach((script) => {
-    if (script.src && !document.head.querySelector(`script[src="${script.src}"]`)) {
-      const newScript = document.createElement('script');
-      newScript.src = script.src;
-      newScript.type = script.type || 'text/javascript';
-      newScript.async = script.async || false;
-      document.head.appendChild(newScript);
-    } else if (!script.src) {
+    if (script.src) {
+      if (!document.head.querySelector(`script[src="${script.src}"]`)) {
+        const newScript = document.createElement('script');
+        newScript.src = script.src;
+        newScript.type = script.type || 'text/javascript';
+        newScript.async = script.async || false;
+        document.head.appendChild(newScript);
+      }
+    } else {
+      // Inline script handling
       const inlineScript = document.createElement('script');
       inlineScript.type = script.type || 'text/javascript';
       inlineScript.textContent = script.textContent;
@@ -103,6 +106,7 @@ const injectMetaAndScripts = (header_code) => {
     }
   });
 };
+
 
 const replaceShortcode = (obj) => {
   if (obj && obj.pageContent) {
